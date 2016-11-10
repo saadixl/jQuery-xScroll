@@ -1,7 +1,7 @@
 (function($) {
 	$.fn.extend({
-	xScroll: function(distance, delay) {
-		return this.each(function() {
+		xScroll: function(distance, delay) {
+			return this.each(function() {
 				var self = $(this);
 				$(document).keyup(function(e) {
 					switch(e.which) {
@@ -18,10 +18,10 @@
 					e.preventDefault();
 				});
 				$(".navscroll__left").click(function(){
-					leftClick(self);
+					leftClick(self, distance, delay);
 				});
 				$(".navscroll__right").click(function(){
-					rightClick(self);
+					rightClick(self, distance, delay);
 				});
 			});
 		}
