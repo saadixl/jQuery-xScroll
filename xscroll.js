@@ -3,6 +3,7 @@
 		xScroll: function(distance, delay) {
 			return this.each(function() {
 				var self = $(this);
+
 				$(document).keyup(function(e) {
 					switch(e.which) {
 						case 37:
@@ -17,44 +18,27 @@
 					}
 					e.preventDefault();
 				});
+
 				$(".navscroll__left").click(function(){
 					leftClick(self, distance, delay);
 				});
+
 				$(".navscroll__right").click(function(){
 					rightClick(self, distance, delay);
 				});
+
 			});
 		}
 	});
+
 	function leftClick(self, distance, delay) {
-		var left = self.css('left');
-		if(left === "auto") {
-			left = 0;
-		}
-		var parentWidth = parseInt(self.parent().css('width'));
-		var childWidth = parseInt(self.css('width'));
-		var childLeft = parseInt(self.css('left'));
-		if((childWidth + childLeft) < parentWidth + distance) {
-			return;
-		}
-		self.css('position', 'relative');
-		self.animate({
-			left: (parseInt(left) - distance)
-		}, delay);
+		var left = distance+self.scrollLeft();
+		self.animate({scrollLeft: left }, delay);
 	}
 
 	function rightClick(self, distance, delay) {
-		var left = self.css('left');
-		var currentLeft = parseInt(left) + distance;
-		if(left === "auto") {
-			currentLeft = 0;
-		}
-		if(currentLeft >= 0) {
-			currentLeft = 0;
-		}
-		self.css('position', 'relative');
-		self.animate({
-			left: currentLeft
-		}, delay);
+		var right = self.scrollLeft()-distance;
+		self.animate({scrollLeft: right}, delay);
 	}
+
 })(jQuery);
